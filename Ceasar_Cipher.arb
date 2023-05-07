@@ -1,16 +1,39 @@
 def ceasar_cipher(string, shift) 
 
-    z_code = 122
-    preceed_a_code = 96
+    wrapStartLower = 96
+    wrapStartUpper = 64
+    aLower = 97
+    aUpper = 65
+    zLower = 122
+    zUpper = 90
     shiftedString = "";
 
-    #EACH_CHAR ISN'T MUTABLE!!! FIX!!!
     string.each_char do |c|
         ascii = c.ord()
+        lower = false
+        upper = false
+        if (ascii >= aLower && ascii <= zLower)
+            lower = true
+        elsif (ascii >= aUpper && ascii <= zUpper) 
+            upper = true
+        end
+        unless(lower || upper)
+            shiftedString<<c;
+            break
+        end
         ascii += shift
-        if (ascii > z_code) then ascii = preceed_a_code + (ascii-z_code) end
+        if (lower && ascii > zLower) 
+            then ascii = wrapStartLOwer + (ascii-zLower) 
+        elsif (upper && ascii > zUpper) 
+            then ascii = wrapStartUpper + (ascii -zUpper) 
+        end
         c = ascii.chr()
         shiftedString<<c;
     end
     return shiftedString
 end
+
+test = "Zebr@"
+
+ceasar_cipher(test, 2)
+
