@@ -1,0 +1,16 @@
+def ceasar_cipher(string, shift) 
+
+    z_code = 122
+    preceed_a_code = 96
+    shiftedString = "";
+
+    #EACH_CHAR ISN'T MUTABLE!!! FIX!!!
+    string.each_char do |c|
+        ascii = c.ord()
+        ascii += shift
+        if (ascii > z_code) then ascii = preceed_a_code + (ascii-z_code) end
+        c = ascii.chr()
+        shiftedString<<c;
+    end
+    return shiftedString
+end
